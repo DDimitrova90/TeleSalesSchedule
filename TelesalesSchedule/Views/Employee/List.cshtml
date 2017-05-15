@@ -1,0 +1,65 @@
+﻿@model List<TelesalesSchedule.Models.Employee>
+
+@{ 
+    ViewBag.Title = "List";
+}
+
+@{var n = 0;}
+
+<div class="container">
+    <div class="well">
+        <h2>Employees</h2>
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr class="success">
+                    <th>Full Name</th>
+                    <th>Username</th>
+                    <th>Manager</th>
+                    <th>Birthday</th>
+                    <th>Full Time</th>
+                    <th>Save Desk</th>
+                    <th>Senior</th>
+                    <th>Deleted</th>                  
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var employee in Model)
+                {
+                    if (n % 2 == 0)
+                    {
+                        @:<tr class="active">
+                    }
+                    else
+                    {
+                        @:<tr>
+                    }
+
+                    <td>@employee.FullName</td>
+                    <td>@employee.UserName</td>
+                    if (employee.Manager != null)
+                    {
+                        <td>@employee.Manager.FullName</td>
+                    }
+                    else
+                    {
+                        <td>none</td>
+                    }
+                    <td>@employee.BirthDay</td>
+                    <td>@employee.FullTimeAgent</td>
+                    <td>@employee.SaveDeskAgent</td>
+                    <td>@employee.SeniorSpecialist</td>
+                    <td>@employee.IsDeleted</td>                       
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Employee", new { @id = employee.Id }, null)
+                    </td>
+
+                    n++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
